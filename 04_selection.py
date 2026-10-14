@@ -60,3 +60,41 @@ print(df[["Height", "Weight", "BMI"]].head(10))
 # print() displays the result in your terminal.
 
 # Use a raw string
+
+# Save your result
+df.to_csv("pokemon_with_bmi.csv")
+
+# Level 1: Warm-up
+# Print the shape of the DataFrame (rows, columns).
+print(df.shape)
+# Print only the Weight column for the first 8 Pokémon.
+print(df["Weight"].head(8))
+# Select the row for "Muk" using loc, then the same row using iloc (find its position first with df.index.get_loc("Muk")).
+# Print the last 5 rows using .tail().
+# Level 2: Selection and filtering
+# Show all Pokémon taller than 1.5 m, with only the Height and Weight columns.
+# Show Pokémon with Weight between 20 and 60 (use &).
+# Show every 3rd Pokémon from row 0 to row 20 using iloc.
+# Print the names (index) of all Pokémon whose name starts with "P". Hint: df.index.str.startswith("P").
+# Level 3: Sorting and calculations
+# Find the 3 lightest and the 3 heaviest Pokémon.
+# Add a column Weight_lb (kg × 2.205), rounded to 1 decimal.
+# Add a column Size that is "Big" if Height > 1.5, otherwise "Small". Hint: np.where(condition, "Big", "Small") after import numpy as np.
+# Use idxmax() and idxmin() to find the tallest and shortest Pokémon by name.
+# Level 4: Exploration (ML-style)
+# Run df.info(), df.describe(), and df.isnull().sum(). Write a comment explaining what each tells you.
+# Find the mean and median of Height and Weight. Are they very different? What might that mean?
+# Use df["Size"].value_counts() to count how many are Big vs Small.
+# If your CSV has a Type column, use df.groupby("Type")[["Height", "Weight"]].mean().
+# Level 5: Mini project
+
+# Build a small Pokémon lookup tool:
+
+# Ask the user for a name (use .strip().title() so “pikachu” works).
+# If found, print its Height, Weight, and BMI nicely formatted, for example: Pikachu: 0.4 m, 6.0 kg, BMI 37.5
+# If not found, catch KeyError and suggest similar names using df.index.str.contains(...).
+# Loop until the user types quit.
+# Challenge questions to think about
+# Why does df.loc["Pikachu":"Muk"] include Muk but df.iloc[0:5] excludes position 5?
+# What happens to df after df.sort_values(...) if you don’t assign the result? Why?
+# Why does df[df["Weight"] > 50 and df["Height"] < 2] raise an error?
