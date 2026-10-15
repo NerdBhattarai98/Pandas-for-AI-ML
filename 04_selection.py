@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv(r"C:\Users\anbit\OneDrive\Desktop\Pandas-for-AI-ML\Data\Data.csv",index_col = "Name")
+df = pd.read_csv(r"C:\Users\Anbit Bhattarai\Desktop\Pandas-for-AI-ML\Data\Data.csv",index_col = "Name")
 print(df)
 # The error happened because you used index_col="Name" when reading your CSV file. This changes Name from 
 # a regular column into the DataFrame's index.
@@ -70,14 +70,29 @@ print(df.shape)
 # Print only the Weight column for the first 8 Pokémon.
 print(df["Weight"].head(8))
 # Select the row for "Muk" using loc, then the same row using iloc (find its position first with df.index.get_loc("Muk")).
+
+print(df.loc["Muk"])
+print(df.iloc[df.index.get_loc("Muk")])
 # Print the last 5 rows using .tail().
+
+print(df.tail(5))
 # Level 2: Selection and filtering
 # Show all Pokémon taller than 1.5 m, with only the Height and Weight columns.
+
+mask = df["Height"] > 1.5
+print(df[mask],["Height","Weight"])
 # Show Pokémon with Weight between 20 and 60 (use &).
+mask = (df["Weight"] > 20) & (df["Weight"] < 60)
+print(df[mask])
 # Show every 3rd Pokémon from row 0 to row 20 using iloc.
+print(df.iloc[0:21:3])
 # Print the names (index) of all Pokémon whose name starts with "P". Hint: df.index.str.startswith("P").
+
+print(df[df.index.str.startswith("P")])
+print(df.index.str.startswith("P").sum())
 # Level 3: Sorting and calculations
 # Find the 3 lightest and the 3 heaviest Pokémon.
+print(df["Weight"].head(3))
 # Add a column Weight_lb (kg × 2.205), rounded to 1 decimal.
 # Add a column Size that is "Big" if Height > 1.5, otherwise "Small". Hint: np.where(condition, "Big", "Small") after import numpy as np.
 # Use idxmax() and idxmin() to find the tallest and shortest Pokémon by name.
